@@ -582,15 +582,26 @@ function handleAdvisorSubmit(event){
     submittedAt: new Date().toISOString()
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
+const formData = new URLSearchParams();
+
+formData.append("program", PROGRAM_NAME);
+formData.append("name", name);
+formData.append("email", email);
+formData.append("phone", phone);
+formData.append(
+  "topMatch",
+  lastRanked && lastRanked.length ? lastRanked[0].title : ""
+);
+
+fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
   method: "POST",
   mode: "no-cors",
-  body: JSON.stringify(payload)
+  body: formData
 })
 .then(() => {
-  document.getElementById('advisorForm').classList.add('hidden');
-  document.getElementById('successEmail').textContent = email;
-  document.getElementById('advisorSuccess').classList.remove('hidden');
+  document.getElementById("advisorForm").classList.add("hidden");
+  document.getElementById("successEmail").textContent = email;
+  document.getElementById("advisorSuccess").classList.remove("hidden");
 })
 .catch(error => {
   alert("There was a problem sending your information. Please try again.");
