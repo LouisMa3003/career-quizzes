@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI & Machine Learning Career Match — AI Roboto Edu</title>
+<style>
+  :root{
+    --ink:#0E1B2A;
+    --paper:#F6F4EF;
+    --panel:#FFFFFF;
+    --line:#DCD6C8;
+    --navy:#16324F;
+    --navy-deep:#0E1B2A;
+    --signal:#C6591C;
+    --signal-soft:#F1DFC9;
+    --teal:#2B6E63;
+    --muted:#5C6B73;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    font-family:'Iowan Old Style','Georgia',serif;
+    color:var(--ink);
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
+  .eyebrow{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:11px;
+    color:var(--signal);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:32px;
+    line-height:1.15;
+    margin:0 0 10px;
+    font-weight:400;
+    letter-spacing:-.01em;
+  }
+  .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.5;
+    margin:0 0 32px;
+    max-width:52ch;
+  }
+  .progress-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.03em;
+  }
+  .progress-track{
+    flex:1;
+    height:2px;
+    background:var(--line);
+    position:relative;
+  }
+  .progress-fill{
+    position:absolute;left:0;top:0;bottom:0;
+    background:var(--signal);
+    width:0%;
+    transition:width .35s ease;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:36px 32px;
+  }
+  .qnum{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12px;
+    color:var(--signal);
+    letter-spacing:.1em;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .qtext{
+    font-size:22px;
+    line-height:1.3;
+    margin:0 0 26px;
+    font-weight:400;
+  }
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    border:1px solid var(--line);
+    padding:16px 18px;
+    cursor:pointer;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:15px;
+    line-height:1.45;
+    color:var(--ink);
+    background:var(--panel);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .option:hover{border-color:var(--navy);}
+  .option .mark{
+    flex:0 0 20px;
+    height:20px;
+    border:1.5px solid var(--muted);
+    border-radius:50%;
+    margin-top:1px;
+    position:relative;
+  }
+  .option.selected{
+    border-color:var(--navy);
+    background:#F4EFE4;
+  }
+  .option.selected .mark{border-color:var(--navy);}
+  .option.selected .mark::after{
+    content:'';
+    position:absolute;
+    inset:3px;
+    border-radius:50%;
+    background:var(--navy);
+  }
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:28px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  button{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:13px 26px;
+    border:none;
+    cursor:pointer;
+    border-radius:var(--radius);
+  }
+  .btn-primary{
+    background:var(--navy);
+    color:#fff;
+  }
+  .btn-primary:disabled{
+    background:#B9BFC4;
+    cursor:not-allowed;
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--muted);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:disabled{visibility:hidden;}
+
+  /* Results */
+  .results-head{margin-bottom:28px;}
+  .result-row{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:22px 24px;
+    margin-bottom:14px;
+  }
+  .result-row.top{border-color:var(--navy);border-width:2px;}
+  .result-top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:8px;
+  }
+  .result-title{font-size:19px;}
+  .result-pct{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  .bar-track{
+    height:5px;background:var(--line);margin:10px 0 12px;position:relative;
+  }
+  .bar-fill{
+    position:absolute;left:0;top:0;bottom:0;background:var(--teal);
+  }
+  .result-row.top .bar-fill{background:var(--signal);}
+  .result-desc{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;
+    line-height:1.55;
+    color:var(--muted);
+    margin:0;
+  }
+  .badge{
+    display:inline-block;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:#fff;
+    background:var(--signal);
+    padding:3px 9px;
+    margin-bottom:10px;
+  }
+  .cta-block{
+    margin-top:32px;
+    padding:28px;
+    background:var(--navy-deep);
+    color:#fff;
+  }
+  .cta-block h3{
+    font-weight:400;font-size:20px;margin:0 0 8px;
+  }
+  .cta-block p{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;line-height:1.55;color:#C9D2D8;margin:0 0 18px;max-width:48ch;
+  }
+  .cta-btn{
+    display:inline-block;
+    background:var(--signal);
+    color:#fff;
+    text-decoration:none;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:13px 26px;
+  }
+  .restart{
+    margin-top:20px;
+    background:none;border:none;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12.5px;color:var(--muted);
+    text-decoration:underline;
+    cursor:pointer;
+    padding:0;
+  }
+  .advisor-block{
+    margin-top:20px;
+    padding:28px;
+    background:var(--panel);
+    border:1px solid var(--line);
+  }
+  .advisor-block h3{
+    font-weight:400;font-size:20px;margin:0 0 8px;
+  }
+  .advisor-block > p{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;line-height:1.55;color:var(--muted);margin:0 0 22px;max-width:52ch;
+  }
+  .field-row{
+    margin-bottom:14px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .field-row label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    font-weight:700;
+  }
+  .field-row input{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:15px;
+    padding:13px 14px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .field-row input:focus{
+    outline:none;
+    border-color:var(--navy);
+  }
+  .privacy-note{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:11px;
+    line-height:1.5;
+    color:var(--muted);
+    margin:14px 0 0;
+  }
+  .success-box{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink);
+    background:var(--signal-soft);
+    border-left:3px solid var(--signal);
+    padding:18px 20px;
+  }
+  .hidden{display:none !important;}
+  @media (max-width:520px){
+    .card{padding:26px 20px;}
+    h1{font-size:26px;}
+    .qtext{font-size:19px;}
+    .result-top-row{flex-direction:column;gap:2px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="intro">
+    <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
+    <h1>Which AI & Machine Learning role fits you?</h1>
+    <p class="sub">Answer 8 quick questions about how you like to work. We'll match you to the AI/ML career paths our graduates move into, ranked by fit — no email required to see your results.</p>
+    <div class="card">
+      <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 22px;line-height:1.6;">
+        Takes about 2 minutes. Based on the AI &amp; Machine Learning Developer program curriculum and its four career pathways.
+      </p>
+      <button class="btn-primary" onclick="startQuiz()">Start the quiz</button>
+    </div>
+  </div>
+
+  <div id="quiz" class="hidden">
+    <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
+    <div class="progress-row">
+      <span id="qcount">Question 1 of 8</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="card">
+      <div class="qnum" id="qnum">Q1</div>
+      <p class="qtext" id="qtext"></p>
+      <div class="options" id="options"></div>
+      <div class="nav-row">
+        <button class="btn-ghost" id="backBtn" onclick="goBack()">Back</button>
+        <button class="btn-primary" id="nextBtn" disabled onclick="goNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results" class="hidden">
+    <div class="results-head">
+      <div class="eyebrow">Your results</div>
+      <h1>Your AI/ML career match</h1>
+      <p class="sub">Ranked by how closely your answers align with each role in the AI &amp; Machine Learning Developer program.</p>
+    </div>
+    <div id="resultRows"></div>
+    <div class="cta-block">
+      <h3>See the full program</h3>
+      <p>All four roles above are reachable through AIRE's 88-hour AI &amp; Machine Learning Developer certificate — project-based, employer-driven, capstone included.</p>
+      <a class="cta-btn" href="https://airobotoedu.com/programs/ai-machine-learning-developer/" target="_blank" rel="noopener">View program details →</a>
+    </div>
+
+    <div class="advisor-block">
+      <h3>Want to talk through your results?</h3>
+      <p>Share your contact info and an AIRE advisor will reach out to discuss your results, and which program and career path fits you best.</p>
+      <form id="advisorForm" onsubmit="handleAdvisorSubmit(event)">
+        <div class="field-row">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" placeholder="Jane Smith" required>
+        </div>
+        <div class="field-row">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="jane@email.com" required>
+        </div>
+        <div class="field-row">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Send my results to an advisor</button>
+        <p class="privacy-note">By submitting, you agree to be contacted by an AIRE advisor about your results and program options.</p>
+      </form>
+      <div id="advisorSuccess" class="hidden success-box">
+        Thanks — an AIRE advisor will reach out to <strong id="successEmail"></strong> shortly to talk through your results.
+      </div>
+    </div>
+    <button class="restart" onclick="restartQuiz()">Retake the quiz</button>
+  </div>
+
+</div>
+
+<script>
+const roles = {
+  aiml: {
+    title: "AI/ML Developer (Junior)",
+    desc: "You're drawn to building things from the ground up — writing the code that trains and improves a model. This role leans hardest on the program's Python, deep learning, and model-training modules."
+  },
+  data: {
+    title: "Data Analyst (ML-focused)",
+    desc: "You like turning raw, messy data into a clear answer. This path leans on the program's data cleaning, feature engineering, and evaluation modules — strong entry point if you're coming from an analytical background."
+  },
+  ops: {
+    title: "AI Operations Associate",
+    desc: "You're the person who keeps things running once they're live — watching for issues and keeping AI-enabled systems reliable. This path leans on the program's deployment, APIs, and monitoring modules."
+  },
+  maint: {
+    title: "Predictive Maintenance Analyst",
+    desc: "You think in terms of equipment health — catching a failure before it happens. This path leans on the program's industrial AI use cases, especially predictive maintenance, taught alongside the core ML curriculum."
+  }
+};
+
+const questions = [
+  {
+    text: "What part of the work sounds most exciting to you?",
+    options: [
+      { label: "Building and training a model from scratch", primary: "aiml" },
+      { label: "Cleaning messy data until it tells a clear story", primary: "data" },
+      { label: "Keeping an AI system running smoothly once it's live", primary: "ops" },
+      { label: "Predicting a machine failure before it happens", primary: "maint" },
+    ]
+  },
+  {
+    text: "Which tool are you most curious to learn?",
+    options: [
+      { label: "TensorFlow / PyTorch for deep learning", primary: "aiml" },
+      { label: "Python and pandas for data wrangling", primary: "data", secondary: "aiml" },
+      { label: "Monitoring dashboards and APIs", primary: "ops" },
+      { label: "Sensor data and equipment logs", primary: "maint" },
+    ]
+  },
+  {
+    text: "Pick the Monday morning task you'd enjoy most.",
+    options: [
+      { label: "Debug why a model's accuracy dropped overnight", primary: "aiml" },
+      { label: "Build a report showing which features actually predict the outcome", primary: "data" },
+      { label: "Investigate an alert that a production AI system is misbehaving", primary: "ops" },
+      { label: "Review vibration and temperature trends for early warning signs", primary: "maint" },
+    ]
+  },
+  {
+    text: "What's your ideal day-to-day team setting?",
+    options: [
+      { label: "A small technical team building the model together", primary: "aiml" },
+      { label: "A cross-functional team turning data into decisions", primary: "data" },
+      { label: "An ops team responsible for keeping systems reliable", primary: "ops", secondary: "aiml" },
+      { label: "A maintenance and engineering team preventing downtime", primary: "maint" },
+    ]
+  },
+  {
+    text: "Which industrial scenario interests you most?",
+    options: [
+      { label: "Detecting product defects on the line with computer vision", primary: "aiml" },
+      { label: "Analyzing production data to optimize throughput", primary: "data" },
+      { label: "Making sure an AI quality-control system never goes down", primary: "ops" },
+      { label: "Scheduling maintenance based on predicted wear", primary: "maint" },
+    ]
+  },
+  {
+    text: "How do you feel about heavier math (linear algebra, calculus)?",
+    options: [
+      { label: "I like it — the deeper the theory, the better", primary: "aiml" },
+      { label: "Comfortable with stats and analysis, less into theory", primary: "data" },
+      { label: "I'd rather focus on applied troubleshooting", primary: "ops" },
+      { label: "I like reading patterns in physical equipment data more than in code", primary: "maint" },
+    ]
+  },
+  {
+    text: "What would feel most satisfying long-term?",
+    options: [
+      { label: "Creating a capability that didn't exist before", primary: "aiml" },
+      { label: "Turning raw numbers into a story leadership acts on", primary: "data" },
+      { label: "Being the person who keeps critical systems running", primary: "ops" },
+      { label: "Preventing costly equipment failures before they happen", primary: "maint" },
+    ]
+  },
+  {
+    text: "Which type of hands-on lab sounds best to you?",
+    options: [
+      { label: "Coding labs — building and training models", primary: "aiml" },
+      { label: "Feature engineering and model evaluation exercises", primary: "data", secondary: "aiml" },
+      { label: "Deployment and monitoring case studies", primary: "ops" },
+      { label: "Predictive maintenance industrial case studies", primary: "maint" },
+    ]
+  },
+];
+
+let current = 0;
+let answers = new Array(questions.length).fill(null);
+let lastRanked = null;
+const PROGRAM_NAME = "AI & Machine Learning Developer";
+
+function startQuiz(){
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = questions[current];
+  document.getElementById('qnum').textContent = "Q" + (current+1);
+  document.getElementById('qtext').textContent = q.text;
+  document.getElementById('qcount').textContent = `Question ${current+1} of ${questions.length}`;
+  document.getElementById('progressFill').style.width = ((current)/questions.length*100) + '%';
+
+  const optDiv = document.getElementById('options');
+  optDiv.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'option' + (answers[current] === i ? ' selected' : '');
+    el.innerHTML = `<span class="mark"></span><span>${opt.label}</span>`;
+    el.onclick = () => selectOption(i);
+    optDiv.appendChild(el);
+  });
+
+  document.getElementById('backBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = answers[current] === null;
+  document.getElementById('nextBtn').textContent = current === questions.length - 1 ? 'See results' : 'Next';
+}
+
+function selectOption(i){
+  answers[current] = i;
+  renderQuestion();
+}
+
+function goNext(){
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function goBack(){
+  if(current > 0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function showResults(){
+  const scores = { aiml: 0, data: 0, ops: 0, maint: 0 };
+  answers.forEach((ansIdx, qIdx) => {
+    const opt = questions[qIdx].options[ansIdx];
+    scores[opt.primary] += 2;
+    if(opt.secondary) scores[opt.secondary] += 1;
+  });
+
+  const maxPossible = questions.length * 2; // 16
+  const ranked = Object.keys(scores)
+    .map(key => ({ key, score: scores[key], pct: Math.round(scores[key] / maxPossible * 100) }))
+    .sort((a,b) => b.score - a.score);
+
+  document.getElementById('quiz').classList.add('hidden');
+  const container = document.getElementById('resultRows');
+  container.innerHTML = '';
+
+  ranked.forEach((r, i) => {
+    const role = roles[r.key];
+    const row = document.createElement('div');
+    row.className = 'result-row' + (i === 0 ? ' top' : '');
+    row.innerHTML = `
+      ${i === 0 ? '<span class="badge">Best match</span>' : ''}
+      <div class="result-top-row">
+        <div class="result-title">${role.title}</div>
+        <div class="result-pct">${r.pct}%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${r.pct}%"></div></div>
+      <p class="result-desc">${role.desc}</p>
+    `;
+    container.appendChild(row);
+  });
+
+  document.getElementById('results').classList.remove('hidden');
+  lastRanked = ranked.map(r => ({ title: roles[r.key].title, pct: r.pct }));
+}
+
+function handleAdvisorSubmit(event){
+  event.preventDefault();
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+
+  const payload = {
+    name: name,
+    email: email,
+    phone: phone,
+    program: PROGRAM_NAME,
+    results: lastRanked,
+    submittedAt: new Date().toISOString()
+  };
+
+  // TODO: Wire this to your CRM/lead system before going live — e.g. POST the
+  // payload to a HubSpot, Mailchimp, or Zapier webhook so an advisor is notified:
+  // fetch('https://your-webhook-url', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(payload)
+  // });
+  console.log('Advisor lead captured:', payload);
+
+  document.getElementById('advisorForm').classList.add('hidden');
+  document.getElementById('successEmail').textContent = email;
+  document.getElementById('advisorSuccess').classList.remove('hidden');
+}
+
+function restartQuiz(){
+  current = 0;
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('intro').classList.remove('hidden');
+  document.getElementById('advisorForm').reset();
+  document.getElementById('advisorForm').classList.remove('hidden');
+  document.getElementById('advisorSuccess').classList.add('hidden');
+}
+</script>
+</body>
+</html>
