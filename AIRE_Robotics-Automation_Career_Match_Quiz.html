@@ -584,15 +584,10 @@ function handleAdvisorSubmit(event){
 
  fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
+  mode: "no-cors",
   body: JSON.stringify(payload)
 })
-.then(response => response.json())
-.then(data => {
-  console.log("Success:", data);
-
+.then(() => {
   document.getElementById('advisorForm').classList.add('hidden');
   document.getElementById('successEmail').textContent = email;
   document.getElementById('advisorSuccess').classList.remove('hidden');
