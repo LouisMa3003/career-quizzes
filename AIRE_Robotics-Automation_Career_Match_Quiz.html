@@ -582,18 +582,25 @@ function handleAdvisorSubmit(event){
     submittedAt: new Date().toISOString()
   };
 
-  // TODO: Wire this to your CRM/lead system before going live — e.g. POST the
-  // payload to a HubSpot, Mailchimp, or Zapier webhook so an advisor is notified:
-  // fetch('https://your-webhook-url', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(payload)
-  // });
-  console.log('Advisor lead captured:', payload);
+ fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+})
+.then(response => response.json())
+.then(data => {
+  console.log("Success:", data);
 
   document.getElementById('advisorForm').classList.add('hidden');
   document.getElementById('successEmail').textContent = email;
   document.getElementById('advisorSuccess').classList.remove('hidden');
+})
+.catch(error => {
+  alert("There was a problem sending your information. Please try again.");
+  console.error(error);
+});
 }
 
 function restartQuiz(){
