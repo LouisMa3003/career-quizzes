@@ -314,10 +314,10 @@
   <div id="intro">
     <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
     <h1>Which AI & Machine Learning role fits you?</h1>
-    <p class="sub">Answer 8 quick questions about how you like to work. We'll match you to the AI/ML career paths our graduates move into, ranked by fit — no email required to see your results.</p>
+    <p class="sub">Answer 30 questions about how you like to work. We'll match you to the AI/ML career paths our graduates move into, ranked by fit — no email required to see your results.</p>
     <div class="card">
       <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 22px;line-height:1.6;">
-        Takes about 2 minutes. Based on the AI &amp; Machine Learning Developer program curriculum and its four career pathways.
+        Takes about 8–10 minutes. Based on the AI &amp; Machine Learning Developer program curriculum and its five career pathways.
       </p>
       <button class="btn-primary" onclick="startQuiz()">Start the quiz</button>
     </div>
@@ -326,7 +326,7 @@
   <div id="quiz" class="hidden">
     <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
     <div class="progress-row">
-      <span id="qcount">Question 1 of 8</span>
+      <span id="qcount">Question 1 of 30</span>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
     <div class="card">
@@ -349,7 +349,7 @@
     <div id="resultRows"></div>
     <div class="cta-block">
       <h3>See the full program</h3>
-      <p>All four roles above are reachable through AIRE's 88-hour AI &amp; Machine Learning Developer certificate — project-based, employer-driven, capstone included.</p>
+      <p>All five roles above are reachable through AIRE's 88-hour AI &amp; Machine Learning Developer certificate — project-based, employer-driven, capstone included.</p>
       <a class="cta-btn" href="https://airobotoedu.com/programs/ai-machine-learning-developer/" target="_blank" rel="noopener">View program details →</a>
     </div>
 
@@ -385,19 +385,23 @@
 const roles = {
   aiml: {
     title: "AI/ML Developer (Junior)",
-    desc: "You're drawn to building things from the ground up — writing the code that trains and improves a model. This role leans hardest on the program's Python, deep learning, and model-training modules."
+    desc: "You're drawn to building things from the ground up \u2014 writing the code that trains and improves a model. This role leans hardest on the program's Python, deep learning, and model-training modules."
   },
   data: {
     title: "Data Analyst (ML-focused)",
-    desc: "You like turning raw, messy data into a clear answer. This path leans on the program's data cleaning, feature engineering, and evaluation modules — strong entry point if you're coming from an analytical background."
+    desc: "You like turning raw, messy data into a clear answer. This path leans on the program's data cleaning, feature engineering, and evaluation modules \u2014 strong entry point if you're coming from an analytical background."
   },
   ops: {
     title: "AI Operations Associate",
-    desc: "You're the person who keeps things running once they're live — watching for issues and keeping AI-enabled systems reliable. This path leans on the program's deployment, APIs, and monitoring modules."
+    desc: "You're the person who keeps things running once they're live \u2014 watching for issues and keeping AI-enabled systems reliable. This path leans on the program's deployment, APIs, and monitoring modules."
   },
   maint: {
     title: "Predictive Maintenance Analyst",
-    desc: "You think in terms of equipment health — catching a failure before it happens. This path leans on the program's industrial AI use cases, especially predictive maintenance, taught alongside the core ML curriculum."
+    desc: "You think in terms of equipment health \u2014 catching a failure before it happens. This path leans on the program's industrial AI use cases, especially predictive maintenance, taught alongside the core ML curriculum."
+  },
+  genai: {
+    title: "Generative AI Application Specialist",
+    desc: "You're drawn to putting large language models to work \u2014 prompting, evaluating outputs, and wiring them into real applications. This path leans on the program's generative AI, prompt engineering, and LLM-integration modules."
   }
 };
 
@@ -409,6 +413,7 @@ const questions = [
       { label: "Cleaning messy data until it tells a clear story", primary: "data" },
       { label: "Keeping an AI system running smoothly once it's live", primary: "ops" },
       { label: "Predicting a machine failure before it happens", primary: "maint" },
+      { label: "Getting a language model to do something useful for real users", primary: "genai" },
     ]
   },
   {
@@ -418,6 +423,7 @@ const questions = [
       { label: "Python and pandas for data wrangling", primary: "data", secondary: "aiml" },
       { label: "Monitoring dashboards and APIs", primary: "ops" },
       { label: "Sensor data and equipment logs", primary: "maint" },
+      { label: "Prompt engineering and LLM APIs", primary: "genai" },
     ]
   },
   {
@@ -427,6 +433,7 @@ const questions = [
       { label: "Build a report showing which features actually predict the outcome", primary: "data" },
       { label: "Investigate an alert that a production AI system is misbehaving", primary: "ops" },
       { label: "Review vibration and temperature trends for early warning signs", primary: "maint" },
+      { label: "Rewrite a prompt that's been giving inconsistent answers", primary: "genai" },
     ]
   },
   {
@@ -436,6 +443,7 @@ const questions = [
       { label: "A cross-functional team turning data into decisions", primary: "data" },
       { label: "An ops team responsible for keeping systems reliable", primary: "ops", secondary: "aiml" },
       { label: "A maintenance and engineering team preventing downtime", primary: "maint" },
+      { label: "A product team shipping AI-powered features quickly", primary: "genai" },
     ]
   },
   {
@@ -445,15 +453,17 @@ const questions = [
       { label: "Analyzing production data to optimize throughput", primary: "data" },
       { label: "Making sure an AI quality-control system never goes down", primary: "ops" },
       { label: "Scheduling maintenance based on predicted wear", primary: "maint" },
+      { label: "Building a chatbot that helps operators troubleshoot the line", primary: "genai" },
     ]
   },
   {
     text: "How do you feel about heavier math (linear algebra, calculus)?",
     options: [
-      { label: "I like it — the deeper the theory, the better", primary: "aiml" },
+      { label: "I like it \u2014 the deeper the theory, the better", primary: "aiml" },
       { label: "Comfortable with stats and analysis, less into theory", primary: "data" },
       { label: "I'd rather focus on applied troubleshooting", primary: "ops" },
       { label: "I like reading patterns in physical equipment data more than in code", primary: "maint" },
+      { label: "I'd rather focus on language and how models respond, not the math underneath", primary: "genai" },
     ]
   },
   {
@@ -463,15 +473,237 @@ const questions = [
       { label: "Turning raw numbers into a story leadership acts on", primary: "data" },
       { label: "Being the person who keeps critical systems running", primary: "ops" },
       { label: "Preventing costly equipment failures before they happen", primary: "maint" },
+      { label: "Shipping AI tools that people use every day", primary: "genai" },
     ]
   },
   {
     text: "Which type of hands-on lab sounds best to you?",
     options: [
-      { label: "Coding labs — building and training models", primary: "aiml" },
+      { label: "Coding labs \u2014 building and training models", primary: "aiml" },
       { label: "Feature engineering and model evaluation exercises", primary: "data", secondary: "aiml" },
       { label: "Deployment and monitoring case studies", primary: "ops" },
       { label: "Predictive maintenance industrial case studies", primary: "maint" },
+      { label: "Building and testing a chatbot or AI assistant", primary: "genai" },
+    ]
+  },
+  {
+    text: "A stakeholder says 'the AI is wrong.' What's your first move?",
+    options: [
+      { label: "Dig into the model's architecture and training data", primary: "aiml" },
+      { label: "Check whether the input data itself is flawed", primary: "data" },
+      { label: "Check the logs and infrastructure for a deployment issue", primary: "ops" },
+      { label: "Check if a sensor is miscalibrated or reporting bad data", primary: "maint" },
+      { label: "Check whether the prompt or context given to the model was unclear", primary: "genai" },
+    ]
+  },
+  {
+    text: "What kind of feedback do you like getting on your work?",
+    options: [
+      { label: "Technical review of my model's architecture and metrics", primary: "aiml" },
+      { label: "Whether my analysis actually answered the business question", primary: "data" },
+      { label: "Whether the system stayed up and performant", primary: "ops" },
+      { label: "Whether my prediction actually caught a real issue in time", primary: "maint" },
+      { label: "Whether the output actually sounded useful and natural", primary: "genai" },
+    ]
+  },
+  {
+    text: "How do you prefer to solve a hard problem?",
+    options: [
+      { label: "Experiment with different model architectures until one works", primary: "aiml" },
+      { label: "Slice the data different ways until a pattern appears", primary: "data" },
+      { label: "Trace the issue through logs, systems, and infrastructure", primary: "ops" },
+      { label: "Compare current readings against historical equipment baselines", primary: "maint" },
+      { label: "Iterate on the prompt or workflow until the output improves", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which subject did you enjoy most in school (or would have)?",
+    options: [
+      { label: "Computer science and programming", primary: "aiml" },
+      { label: "Statistics or applied math", primary: "data" },
+      { label: "Anything hands-on with systems and troubleshooting", primary: "ops" },
+      { label: "Shop class, engineering, or working with machines", primary: "maint" },
+      { label: "Writing, language, or communication", primary: "genai" },
+    ]
+  },
+  {
+    text: "What's your risk tolerance for shipping something not fully tested?",
+    options: [
+      { label: "I'd rather keep refining the model until it's solid", primary: "aiml" },
+      { label: "I want the data validated before I trust any conclusion", primary: "data" },
+      { label: "I'm cautious \u2014 a bad deploy affects everyone using the system", primary: "ops" },
+      { label: "I'm cautious \u2014 a missed prediction means real equipment damage", primary: "maint" },
+      { label: "I'm comfortable iterating in public and improving as I go", primary: "genai" },
+    ]
+  },
+  {
+    text: "When something breaks in production, what's your instinct?",
+    options: [
+      { label: "Check if the model itself degraded or drifted", primary: "aiml" },
+      { label: "Check if the incoming data changed or broke a pipeline", primary: "data" },
+      { label: "Check the servers, APIs, and infrastructure first", primary: "ops" },
+      { label: "Check the physical equipment and sensors first", primary: "maint" },
+      { label: "Check what the model was actually asked and what it returned", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which work environment appeals most?",
+    options: [
+      { label: "Deep-focus solo coding time", primary: "aiml" },
+      { label: "Working closely with business stakeholders on findings", primary: "data" },
+      { label: "An always-on environment where reliability matters most", primary: "ops" },
+      { label: "Split between a control room and the factory floor", primary: "maint" },
+      { label: "A fast-moving product environment shipping new features often", primary: "genai" },
+    ]
+  },
+  {
+    text: "How do you like to learn something new?",
+    options: [
+      { label: "Reading papers and reimplementing techniques myself", primary: "aiml" },
+      { label: "Working through a real messy dataset end to end", primary: "data" },
+      { label: "Breaking and fixing a system in a sandbox environment", primary: "ops" },
+      { label: "Studying real equipment failure case studies", primary: "maint" },
+      { label: "Experimenting directly with a chatbot or AI tool", primary: "genai" },
+    ]
+  },
+  {
+    text: "What's your pace preference?",
+    options: [
+      { label: "Long, deep builds \u2014 I don't mind a model taking weeks to get right", primary: "aiml" },
+      { label: "A steady cadence of analysis and reporting", primary: "data" },
+      { label: "Fast response when something goes wrong, calm otherwise", primary: "ops" },
+      { label: "Ongoing vigilance \u2014 small checks, consistently, over time", primary: "maint" },
+      { label: "Quick iteration \u2014 ship, test, and adjust fast", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which of these mottos fits you best?",
+    options: [
+      { label: "\"If it doesn't exist yet, I'll build it.\"", primary: "aiml" },
+      { label: "\"Let the data decide.\"", primary: "data" },
+      { label: "\"If it's not reliable, it's not done.\"", primary: "ops" },
+      { label: "\"An ounce of prevention beats a pound of repair.\"", primary: "maint" },
+      { label: "\"The right prompt unlocks the right answer.\"", primary: "genai" },
+    ]
+  },
+  {
+    text: "What do coworkers come to you for?",
+    options: [
+      { label: "Help figuring out why a model isn't learning well", primary: "aiml" },
+      { label: "Help making sense of a confusing dataset", primary: "data" },
+      { label: "Help when a system goes down and needs to come back fast", primary: "ops" },
+      { label: "Help spotting early signs something's about to fail", primary: "maint" },
+      { label: "Help getting better results out of an AI tool", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which scenario interests you most?",
+    options: [
+      { label: "Training a model to recognize objects in real time", primary: "aiml" },
+      { label: "Finding which factors best predict customer churn", primary: "data" },
+      { label: "Making sure an AI-driven service has zero downtime during launch", primary: "ops" },
+      { label: "Building a dashboard that flags equipment about to fail", primary: "maint" },
+      { label: "Building an internal assistant that answers employee questions", primary: "genai" },
+    ]
+  },
+  {
+    text: "How do you handle unclear or open-ended instructions?",
+    options: [
+      { label: "I define the technical approach myself and iterate", primary: "aiml" },
+      { label: "I dig into the data first to figure out what's actually being asked", primary: "data" },
+      { label: "I want a clear spec before touching a live system", primary: "ops" },
+      { label: "I follow documented procedures closely", primary: "maint" },
+      { label: "I experiment with a few prompts to see what works", primary: "genai" },
+    ]
+  },
+  {
+    text: "What's more satisfying \u2014 starting something new or maintaining something that works?",
+    options: [
+      { label: "Starting \u2014 building the first working version of a model", primary: "aiml" },
+      { label: "Starting \u2014 a fresh dataset with a story no one's found yet", primary: "data" },
+      { label: "Maintaining \u2014 keeping something reliable is its own reward", primary: "ops" },
+      { label: "Maintaining \u2014 the quiet work of prevention matters most", primary: "maint" },
+      { label: "Starting \u2014 prototyping new AI-powered ideas quickly", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which part of onboarding training would excite you most?",
+    options: [
+      { label: "Writing your first neural network from scratch", primary: "aiml" },
+      { label: "Cleaning your first real-world messy dataset", primary: "data" },
+      { label: "Deploying your first model to a live endpoint", primary: "ops" },
+      { label: "Reading your first set of equipment sensor logs", primary: "maint" },
+      { label: "Building your first working chatbot", primary: "genai" },
+    ]
+  },
+  {
+    text: "Pick the tool or skill you'd want to master first.",
+    options: [
+      { label: "Neural network architectures", primary: "aiml" },
+      { label: "SQL and data visualization", primary: "data" },
+      { label: "CI/CD pipelines and cloud monitoring", primary: "ops" },
+      { label: "Vibration and thermal-imaging analysis", primary: "maint" },
+      { label: "Prompt design and LLM fine-tuning", primary: "genai" },
+    ]
+  },
+  {
+    text: "What's your ideal way of proving a model actually works?",
+    options: [
+      { label: "Rigorous benchmarking against test datasets", primary: "aiml" },
+      { label: "Clear before/after metrics tied to a business outcome", primary: "data" },
+      { label: "It runs reliably under real production load", primary: "ops" },
+      { label: "It caught a real failure before it happened", primary: "maint" },
+      { label: "Real users find the output genuinely useful", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which achievement would make you proudest after year one?",
+    options: [
+      { label: "Shipping a model that hits a hard accuracy target", primary: "aiml" },
+      { label: "A report that changed how leadership made a decision", primary: "data" },
+      { label: "Zero unplanned downtime on my watch", primary: "ops" },
+      { label: "Catching a failure before it cost the company money", primary: "maint" },
+      { label: "An AI feature that got real adoption from users", primary: "genai" },
+    ]
+  },
+  {
+    text: "What's your communication style at work?",
+    options: [
+      { label: "Technical and precise, mostly with other engineers", primary: "aiml" },
+      { label: "Translating numbers into plain language for non-technical folks", primary: "data" },
+      { label: "Calm, clear updates during high-pressure incidents", primary: "ops" },
+      { label: "Direct, practical reports to maintenance and engineering teams", primary: "maint" },
+      { label: "Conversational \u2014 I like refining how something is worded", primary: "genai" },
+    ]
+  },
+  {
+    text: "Which added skill sounds most appealing to pick up later?",
+    options: [
+      { label: "Advanced deep learning architectures", primary: "aiml" },
+      { label: "A/B testing and experiment design", primary: "data" },
+      { label: "Site reliability engineering practices", primary: "ops" },
+      { label: "Vibration analysis certification", primary: "maint" },
+      { label: "Retrieval-augmented generation and agentic workflows", primary: "genai" },
+    ]
+  },
+  {
+    text: "What's a strength people often point out in you?",
+    options: [
+      { label: "I'm persistent until the technical problem is solved", primary: "aiml" },
+      { label: "I notice patterns other people miss in data", primary: "data" },
+      { label: "I stay calm and methodical when something's on fire", primary: "ops" },
+      { label: "I catch small warning signs before they become big problems", primary: "maint" },
+      { label: "I'm good at getting AI tools to actually do what's needed", primary: "genai" },
+    ]
+  },
+  {
+    text: "If you could only keep one part of the job, what would it be?",
+    options: [
+      { label: "Building and training the model itself", primary: "aiml" },
+      { label: "Turning data into a clear, actionable insight", primary: "data" },
+      { label: "Keeping a live AI system healthy and available", primary: "ops" },
+      { label: "Catching equipment problems before they cost real money", primary: "maint" },
+      { label: "Making a generative AI tool genuinely useful for people", primary: "genai" },
     ]
   },
 ];
@@ -582,31 +814,18 @@ function handleAdvisorSubmit(event){
     submittedAt: new Date().toISOString()
   };
 
-const formData = new URLSearchParams();
+  // TODO: Wire this to your CRM/lead system before going live — e.g. POST the
+  // payload to a HubSpot, Mailchimp, or Zapier webhook so an advisor is notified:
+  // fetch('https://your-webhook-url', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(payload)
+  // });
+  console.log('Advisor lead captured:', payload);
 
-formData.append("program", PROGRAM_NAME);
-formData.append("name", name);
-formData.append("email", email);
-formData.append("phone", phone);
-formData.append(
-  "topMatch",
-  lastRanked && lastRanked.length ? lastRanked[0].title : ""
-);
-
-fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
-  method: "POST",
-  mode: "no-cors",
-  body: formData
-})
-.then(() => {
-  document.getElementById("advisorForm").classList.add("hidden");
-  document.getElementById("successEmail").textContent = email;
-  document.getElementById("advisorSuccess").classList.remove("hidden");
-})
-.catch(error => {
-  alert("There was a problem sending your information. Please try again.");
-  console.error(error);
-});
+  document.getElementById('advisorForm').classList.add('hidden');
+  document.getElementById('successEmail').textContent = email;
+  document.getElementById('advisorSuccess').classList.remove('hidden');
 }
 
 function restartQuiz(){

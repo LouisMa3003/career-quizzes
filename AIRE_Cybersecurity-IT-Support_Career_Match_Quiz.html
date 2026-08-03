@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity & IT Support Career Match — AI Roboto Edu</title>
+<style>
+  :root{
+    --ink:#0E1B2A;
+    --paper:#F6F4EF;
+    --panel:#FFFFFF;
+    --line:#DCD6C8;
+    --navy:#2E2A4A;
+    --navy-deep:#181530;
+    --signal:#6B4FA0;
+    --signal-soft:#E3DCF0;
+    --teal:#4A5C7A;
+    --muted:#5C6B73;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    font-family:'Iowan Old Style','Georgia',serif;
+    color:var(--ink);
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
+  .eyebrow{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:11px;
+    color:var(--signal);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:32px;
+    line-height:1.15;
+    margin:0 0 10px;
+    font-weight:400;
+    letter-spacing:-.01em;
+  }
+  .sub{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.5;
+    margin:0 0 32px;
+    max-width:52ch;
+  }
+  .progress-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.03em;
+  }
+  .progress-track{
+    flex:1;
+    height:2px;
+    background:var(--line);
+    position:relative;
+  }
+  .progress-fill{
+    position:absolute;left:0;top:0;bottom:0;
+    background:var(--signal);
+    width:0%;
+    transition:width .35s ease;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:36px 32px;
+  }
+  .qnum{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12px;
+    color:var(--signal);
+    letter-spacing:.1em;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .qtext{
+    font-size:22px;
+    line-height:1.3;
+    margin:0 0 26px;
+    font-weight:400;
+  }
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    border:1px solid var(--line);
+    padding:16px 18px;
+    cursor:pointer;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:15px;
+    line-height:1.45;
+    color:var(--ink);
+    background:var(--panel);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .option:hover{border-color:var(--navy);}
+  .option .mark{
+    flex:0 0 20px;
+    height:20px;
+    border:1.5px solid var(--muted);
+    border-radius:50%;
+    margin-top:1px;
+    position:relative;
+  }
+  .option.selected{
+    border-color:var(--navy);
+    background:#F4EFE4;
+  }
+  .option.selected .mark{border-color:var(--navy);}
+  .option.selected .mark::after{
+    content:'';
+    position:absolute;
+    inset:3px;
+    border-radius:50%;
+    background:var(--navy);
+  }
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:28px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  button{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:13px 26px;
+    border:none;
+    cursor:pointer;
+    border-radius:var(--radius);
+  }
+  .btn-primary{
+    background:var(--navy);
+    color:#fff;
+  }
+  .btn-primary:disabled{
+    background:#B9BFC4;
+    cursor:not-allowed;
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--muted);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:disabled{visibility:hidden;}
+
+  /* Results */
+  .results-head{margin-bottom:28px;}
+  .result-row{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:22px 24px;
+    margin-bottom:14px;
+  }
+  .result-row.top{border-color:var(--navy);border-width:2px;}
+  .result-top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:8px;
+  }
+  .result-title{font-size:19px;}
+  .result-pct{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  .bar-track{
+    height:5px;background:var(--line);margin:10px 0 12px;position:relative;
+  }
+  .bar-fill{
+    position:absolute;left:0;top:0;bottom:0;background:var(--teal);
+  }
+  .result-row.top .bar-fill{background:var(--signal);}
+  .result-desc{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;
+    line-height:1.55;
+    color:var(--muted);
+    margin:0;
+  }
+  .badge{
+    display:inline-block;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:#fff;
+    background:var(--signal);
+    padding:3px 9px;
+    margin-bottom:10px;
+  }
+  .cta-block{
+    margin-top:32px;
+    padding:28px;
+    background:var(--navy-deep);
+    color:#fff;
+  }
+  .cta-block h3{
+    font-weight:400;font-size:20px;margin:0 0 8px;
+  }
+  .cta-block p{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;line-height:1.55;color:#C9D2D8;margin:0 0 18px;max-width:48ch;
+  }
+  .cta-btn{
+    display:inline-block;
+    background:var(--signal);
+    color:#fff;
+    text-decoration:none;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:13px 26px;
+  }
+  .restart{
+    margin-top:20px;
+    background:none;border:none;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12.5px;color:var(--muted);
+    text-decoration:underline;
+    cursor:pointer;
+    padding:0;
+  }
+  .advisor-block{
+    margin-top:20px;
+    padding:28px;
+    background:var(--panel);
+    border:1px solid var(--line);
+  }
+  .advisor-block h3{
+    font-weight:400;font-size:20px;margin:0 0 8px;
+  }
+  .advisor-block > p{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;line-height:1.55;color:var(--muted);margin:0 0 22px;max-width:52ch;
+  }
+  .field-row{
+    margin-bottom:14px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .field-row label{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    font-weight:700;
+  }
+  .field-row input{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:15px;
+    padding:13px 14px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .field-row input:focus{
+    outline:none;
+    border-color:var(--navy);
+  }
+  .privacy-note{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:11px;
+    line-height:1.5;
+    color:var(--muted);
+    margin:14px 0 0;
+  }
+  .success-box{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink);
+    background:var(--signal-soft);
+    border-left:3px solid var(--signal);
+    padding:18px 20px;
+  }
+  .hidden{display:none !important;}
+  @media (max-width:520px){
+    .card{padding:26px 20px;}
+    h1{font-size:26px;}
+    .qtext{font-size:19px;}
+    .result-top-row{flex-direction:column;gap:2px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="intro">
+    <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
+    <h1>Which Cybersecurity & IT Support role fits you?</h1>
+    <p class="sub">Answer 30 questions about how you like to work. We'll match you to the cybersecurity and IT career paths our graduates move into, ranked by fit — no email required to see your results.</p>
+    <div class="card">
+      <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 22px;line-height:1.6;">
+        Takes about 8–10 minutes. Based on the Cybersecurity &amp; IT Support Specialist program curriculum and its five career pathways.
+      </p>
+      <button class="btn-primary" onclick="startQuiz()">Start the quiz</button>
+    </div>
+  </div>
+
+  <div id="quiz" class="hidden">
+    <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
+    <div class="progress-row">
+      <span id="qcount">Question 1 of 30</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="card">
+      <div class="qnum" id="qnum">Q1</div>
+      <p class="qtext" id="qtext"></p>
+      <div class="options" id="options"></div>
+      <div class="nav-row">
+        <button class="btn-ghost" id="backBtn" onclick="goBack()">Back</button>
+        <button class="btn-primary" id="nextBtn" disabled onclick="goNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results" class="hidden">
+    <div class="results-head">
+      <div class="eyebrow">Your results</div>
+      <h1>Your Cybersecurity & IT Support career match</h1>
+      <p class="sub">Ranked by how closely your answers align with each role in the Cybersecurity &amp; IT Support Specialist program.</p>
+    </div>
+    <div id="resultRows"></div>
+    <div class="cta-block">
+      <h3>See the full program</h3>
+      <p>All five roles above are reachable through AIRE's 104-hour Cybersecurity &amp; IT Support Specialist certificate — hands-on labs, industry-recognized exam prep, and an employer-driven capstone.</p>
+      <a class="cta-btn" href="https://airobotoedu.com/programs/cybersecurity-it-support-specialist/" target="_blank" rel="noopener">View program details →</a>
+    </div>
+
+    <div class="advisor-block">
+      <h3>Want to talk through your results?</h3>
+      <p>Share your contact info and an AIRE advisor will reach out to discuss your results, and which program and career path fits you best.</p>
+      <form id="advisorForm" onsubmit="handleAdvisorSubmit(event)">
+        <div class="field-row">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" placeholder="Jane Smith" required>
+        </div>
+        <div class="field-row">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="jane@email.com" required>
+        </div>
+        <div class="field-row">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Send my results to an advisor</button>
+        <p class="privacy-note">By submitting, you agree to be contacted by an AIRE advisor about your results and program options.</p>
+      </form>
+      <div id="advisorSuccess" class="hidden success-box">
+        Thanks — an AIRE advisor will reach out to <strong id="successEmail"></strong> shortly to talk through your results.
+      </div>
+    </div>
+    <button class="restart" onclick="restartQuiz()">Retake the quiz</button>
+  </div>
+
+</div>
+
+<script>
+const roles = {
+  helpdesk: {
+    title: "IT Help Desk Support Specialist",
+    desc: "You like being the first person someone calls when their tech breaks \u2014 patient troubleshooting, ticket triage, and clear explanations. This leans on the program's IT fundamentals, ticketing systems, and end-user support modules."
+  },
+  network: {
+    title: "Network Support Technician",
+    desc: "You're drawn to how everything connects \u2014 routers, switches, and keeping traffic moving reliably. This leans on the program's networking fundamentals, routing and switching, and network-troubleshooting modules."
+  },
+  soc: {
+    title: "Security Operations (SOC) Analyst, Tier 1",
+    desc: "You like watching for the thing that shouldn't be happening \u2014 alerts, logs, and catching an intrusion early. This leans on the program's SIEM, log-analysis, and incident-response modules."
+  },
+  sysadmin: {
+    title: "Junior Systems Administrator",
+    desc: "You like keeping servers, accounts, and infrastructure running smoothly behind the scenes. This leans on the program's systems administration, Active Directory, and cloud-fundamentals modules."
+  },
+  compliance: {
+    title: "Cybersecurity Compliance & Risk Analyst",
+    desc: "You think in terms of policy, controls, and closing the gap before it becomes a breach. This leans on the program's risk-assessment, security-framework (NIST/ISO), and compliance-audit modules."
+  }
+};
+
+const questions = [
+  {
+    text: "What part of the work sounds most exciting to you?",
+    options: [
+      { label: "Walking someone through fixing their tech issue, step by step", primary: "helpdesk" },
+      { label: "Figuring out why a network connection keeps dropping", primary: "network" },
+      { label: "Spotting a suspicious login before it becomes a breach", primary: "soc" },
+      { label: "Keeping servers and user accounts running smoothly", primary: "sysadmin" },
+      { label: "Making sure the company actually follows its own security policy", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which skill are you most curious to build?",
+    options: [
+      { label: "Ticketing systems and customer-facing troubleshooting", primary: "helpdesk" },
+      { label: "Routing, switching, and network diagnostics", primary: "network" },
+      { label: "Reading logs and SIEM alerts", primary: "soc" },
+      { label: "Active Directory and server administration", primary: "sysadmin", secondary: "network" },
+      { label: "Security frameworks like NIST and ISO 27001", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Pick the Monday morning task you'd enjoy most.",
+    options: [
+      { label: "Work through a queue of end-user support tickets", primary: "helpdesk" },
+      { label: "Diagnose why a branch office lost connectivity overnight", primary: "network" },
+      { label: "Review overnight security alerts for anything real", primary: "soc" },
+      { label: "Provision new accounts and patch a batch of servers", primary: "sysadmin" },
+      { label: "Update a risk register ahead of a compliance audit", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's your ideal day-to-day team setting?",
+    options: [
+      { label: "A support desk fielding requests from across the company", primary: "helpdesk" },
+      { label: "A network team keeping infrastructure connected and fast", primary: "network" },
+      { label: "A security operations team watching for threats around the clock", primary: "soc" },
+      { label: "An IT team keeping systems and accounts running behind the scenes", primary: "sysadmin" },
+      { label: "A governance team working with policy and audits", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which scenario interests you most?",
+    options: [
+      { label: "A new employee can't log into anything on day one", primary: "helpdesk" },
+      { label: "A new office needs its network designed and wired", primary: "network" },
+      { label: "An alert fires for unusual login activity at 2am", primary: "soc" },
+      { label: "A server needs to be migrated with zero downtime", primary: "sysadmin" },
+      { label: "An auditor is asking for evidence the company follows its policies", primary: "compliance" },
+    ]
+  },
+  {
+    text: "How do you feel about talking directly with frustrated end users?",
+    options: [
+      { label: "I actually enjoy it \u2014 I like calming someone down and solving it", primary: "helpdesk" },
+      { label: "I'd rather work on infrastructure than the phone", primary: "network" },
+      { label: "I prefer working from logs and alerts, not people", primary: "soc" },
+      { label: "I'm fine with it occasionally, but prefer behind-the-scenes work", primary: "sysadmin" },
+      { label: "I'd rather write the policy than explain it one-on-one", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What would feel most satisfying long-term?",
+    options: [
+      { label: "Being the person who makes everyone's day easier with tech", primary: "helpdesk" },
+      { label: "Building a network infrastructure that just works", primary: "network" },
+      { label: "Catching a real attack before it does damage", primary: "soc" },
+      { label: "Being the reliable backbone that keeps systems running", primary: "sysadmin" },
+      { label: "Making sure the organization never fails an audit", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which type of hands-on lab sounds best to you?",
+    options: [
+      { label: "Simulated help desk ticket triage exercises", primary: "helpdesk" },
+      { label: "Building and troubleshooting a virtual network", primary: "network" },
+      { label: "Investigating a simulated security incident in a SIEM", primary: "soc" },
+      { label: "Setting up and hardening a server environment", primary: "sysadmin" },
+      { label: "Conducting a mock compliance audit", primary: "compliance" },
+    ]
+  },
+  {
+    text: "A user reports 'the internet is down.' What's your first move?",
+    options: [
+      { label: "Walk them through basic checks over the phone", primary: "helpdesk" },
+      { label: "Check the router, switch, and connection status directly", primary: "network" },
+      { label: "Check if it's actually a security-related outage", primary: "soc" },
+      { label: "Check if it's a server or DNS issue on our end", primary: "sysadmin" },
+      { label: "Check if this violates an uptime commitment we're accountable for", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What kind of feedback do you like getting on your work?",
+    options: [
+      { label: "Whether the user actually left the interaction satisfied", primary: "helpdesk" },
+      { label: "Whether the network stayed fast and stable", primary: "network" },
+      { label: "Whether I correctly identified a real threat vs. a false alarm", primary: "soc" },
+      { label: "Whether systems stayed up and secure under my watch", primary: "sysadmin" },
+      { label: "Whether our documentation would hold up under audit", primary: "compliance" },
+    ]
+  },
+  {
+    text: "How do you prefer to solve a hard problem?",
+    options: [
+      { label: "Ask the user questions to narrow down what's actually wrong", primary: "helpdesk" },
+      { label: "Trace the issue hop by hop through the network", primary: "network" },
+      { label: "Correlate multiple log sources to find the real story", primary: "soc" },
+      { label: "Check configurations and permissions systematically", primary: "sysadmin" },
+      { label: "Map the issue back to a specific policy or control gap", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which subject did you enjoy most in school (or would have)?",
+    options: [
+      { label: "Anything involving helping people directly", primary: "helpdesk" },
+      { label: "Anything about how systems and infrastructure connect", primary: "network" },
+      { label: "Puzzles, mysteries, or detective-style problem-solving", primary: "soc" },
+      { label: "Organizing and maintaining complex systems", primary: "sysadmin" },
+      { label: "Rules, policy, and how organizations are structured", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's your risk tolerance for making a live change?",
+    options: [
+      { label: "I stick to guided troubleshooting steps, nothing risky", primary: "helpdesk" },
+      { label: "I'm comfortable reconfiguring live network equipment carefully", primary: "network" },
+      { label: "I'd rather investigate thoroughly before taking any action", primary: "soc" },
+      { label: "I'm careful \u2014 a mistake on a server affects everyone", primary: "sysadmin" },
+      { label: "I'd rather flag the risk than make the change myself", primary: "compliance" },
+    ]
+  },
+  {
+    text: "When something breaks, what's your instinct?",
+    options: [
+      { label: "Ask what changed recently from the user's side", primary: "helpdesk" },
+      { label: "Check connectivity and hardware first", primary: "network" },
+      { label: "Check if this could be malicious, not just broken", primary: "soc" },
+      { label: "Check server logs and recent configuration changes", primary: "sysadmin" },
+      { label: "Check whether this exposes a compliance gap", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which work environment appeals most?",
+    options: [
+      { label: "A busy support desk with a steady stream of tickets", primary: "helpdesk" },
+      { label: "A network operations center monitoring infrastructure", primary: "network" },
+      { label: "A security operations center watching for threats", primary: "soc" },
+      { label: "A quiet back-office environment managing systems", primary: "sysadmin" },
+      { label: "A more structured, meeting- and documentation-heavy role", primary: "compliance" },
+    ]
+  },
+  {
+    text: "How do you like to learn something new?",
+    options: [
+      { label: "Practicing on realistic help desk scenarios", primary: "helpdesk" },
+      { label: "Building a small network and breaking it on purpose", primary: "network" },
+      { label: "Working through real-world attack case studies", primary: "soc" },
+      { label: "Setting up and configuring systems hands-on", primary: "sysadmin" },
+      { label: "Reading through real frameworks and applying them to a scenario", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's your pace preference?",
+    options: [
+      { label: "A steady flow of tickets, one after another", primary: "helpdesk" },
+      { label: "Calm most days, focused when something's down", primary: "network" },
+      { label: "Watchful and alert, ready to react quickly", primary: "soc" },
+      { label: "Planned maintenance windows and steady upkeep", primary: "sysadmin" },
+      { label: "Slower-paced, thorough, deadline-driven around audits", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which of these mottos fits you best?",
+    options: [
+      { label: "\"Every ticket is a person who needs help.\"", primary: "helpdesk" },
+      { label: "\"If it's not connected, nothing else matters.\"", primary: "network" },
+      { label: "\"Trust, but verify every alert.\"", primary: "soc" },
+      { label: "\"Keep it patched, keep it running.\"", primary: "sysadmin" },
+      { label: "\"Document it, or it didn't happen.\"", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What do coworkers come to you for?",
+    options: [
+      { label: "Help figuring out a confusing tech problem", primary: "helpdesk" },
+      { label: "Help when the network is slow or down", primary: "network" },
+      { label: "A second opinion on whether something looks suspicious", primary: "soc" },
+      { label: "Help with server or account access issues", primary: "sysadmin" },
+      { label: "Help understanding what a policy actually requires", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which scenario interests you most?",
+    options: [
+      { label: "Rolling out new laptops to an entire department", primary: "helpdesk" },
+      { label: "Redesigning a company's Wi-Fi coverage", primary: "network" },
+      { label: "Investigating a phishing email that got clicked", primary: "soc" },
+      { label: "Migrating email and file storage to the cloud", primary: "sysadmin" },
+      { label: "Preparing evidence for a SOC 2 audit", primary: "compliance" },
+    ]
+  },
+  {
+    text: "How do you handle unclear or open-ended instructions?",
+    options: [
+      { label: "I ask the user clarifying questions right away", primary: "helpdesk" },
+      { label: "I start mapping out the network to understand the issue", primary: "network" },
+      { label: "I gather more log data before drawing conclusions", primary: "soc" },
+      { label: "I check existing documentation and configs first", primary: "sysadmin" },
+      { label: "I look for the relevant policy or framework requirement", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's more satisfying \u2014 quick wins or long investigations?",
+    options: [
+      { label: "Quick wins \u2014 solving someone's issue in minutes", primary: "helpdesk" },
+      { label: "Quick wins \u2014 restoring connectivity fast", primary: "network" },
+      { label: "Long investigations \u2014 following a thread to the real story", primary: "soc" },
+      { label: "A mix \u2014 routine upkeep with occasional deep projects", primary: "sysadmin" },
+      { label: "Long investigations \u2014 building a case, methodically", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which part of onboarding training would excite you most?",
+    options: [
+      { label: "Your first day resolving real help desk tickets", primary: "helpdesk" },
+      { label: "Configuring your first router and switch", primary: "network" },
+      { label: "Your first SIEM alert investigation", primary: "soc" },
+      { label: "Standing up your first server environment", primary: "sysadmin" },
+      { label: "Walking through your first compliance framework", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Pick the tool or skill you'd want to master first.",
+    options: [
+      { label: "Ticketing and remote-support tools", primary: "helpdesk" },
+      { label: "Routers, switches, and firewalls", primary: "network" },
+      { label: "SIEM platforms and log analysis", primary: "soc" },
+      { label: "Active Directory and cloud administration", primary: "sysadmin" },
+      { label: "Risk-assessment and audit frameworks", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's your ideal way of proving a job was done right?",
+    options: [
+      { label: "The user's issue is fully resolved and they're satisfied", primary: "helpdesk" },
+      { label: "The network runs fast with zero dropped connections", primary: "network" },
+      { label: "A real threat was caught before it caused damage", primary: "soc" },
+      { label: "Systems stay up, patched, and secure", primary: "sysadmin" },
+      { label: "The organization passes its audit cleanly", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which achievement would make you proudest after year one?",
+    options: [
+      { label: "A strong track record of fast, friendly ticket resolutions", primary: "helpdesk" },
+      { label: "Rebuilding a network to be faster and more reliable", primary: "network" },
+      { label: "Being the one who caught a real incident early", primary: "soc" },
+      { label: "Zero unplanned outages on systems I manage", primary: "sysadmin" },
+      { label: "Leading the org through a clean, successful audit", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's your communication style at work?",
+    options: [
+      { label: "Warm, patient, and plain-language with end users", primary: "helpdesk" },
+      { label: "Precise and technical about infrastructure status", primary: "network" },
+      { label: "Clear, urgent, and fact-based during an incident", primary: "soc" },
+      { label: "Straightforward updates on system status and changes", primary: "sysadmin" },
+      { label: "Formal, careful, and well-documented", primary: "compliance" },
+    ]
+  },
+  {
+    text: "Which added certification sounds most appealing to pick up later?",
+    options: [
+      { label: "CompTIA A+ and advanced support certifications", primary: "helpdesk" },
+      { label: "CompTIA Network+ or Cisco CCNA", primary: "network" },
+      { label: "CompTIA Security+ or a SOC analyst certification", primary: "soc" },
+      { label: "Microsoft or cloud administrator certification", primary: "sysadmin" },
+      { label: "CISA, CRISC, or an ISO 27001 lead-auditor credential", primary: "compliance" },
+    ]
+  },
+  {
+    text: "What's a strength people often point out in you?",
+    options: [
+      { label: "I stay patient and clear even when someone's frustrated", primary: "helpdesk" },
+      { label: "I can picture how a whole network fits together", primary: "network" },
+      { label: "I notice when something looks slightly off", primary: "soc" },
+      { label: "I'm dependable \u2014 things just work when I'm on it", primary: "sysadmin" },
+      { label: "I'm thorough about following rules and documenting things", primary: "compliance" },
+    ]
+  },
+  {
+    text: "If you could only keep one part of the job, what would it be?",
+    options: [
+      { label: "Directly helping someone solve their tech problem", primary: "helpdesk" },
+      { label: "Keeping the network fast and connected", primary: "network" },
+      { label: "Catching a real threat before it causes harm", primary: "soc" },
+      { label: "Keeping systems and accounts running reliably", primary: "sysadmin" },
+      { label: "Making sure the organization stays genuinely secure and compliant", primary: "compliance" },
+    ]
+  },
+];
+
+let current = 0;
+let answers = new Array(questions.length).fill(null);
+let lastRanked = null;
+const PROGRAM_NAME = "Cybersecurity & IT Support Specialist";
+
+function startQuiz(){
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = questions[current];
+  document.getElementById('qnum').textContent = "Q" + (current+1);
+  document.getElementById('qtext').textContent = q.text;
+  document.getElementById('qcount').textContent = `Question ${current+1} of ${questions.length}`;
+  document.getElementById('progressFill').style.width = ((current)/questions.length*100) + '%';
+
+  const optDiv = document.getElementById('options');
+  optDiv.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'option' + (answers[current] === i ? ' selected' : '');
+    el.innerHTML = `<span class="mark"></span><span>${opt.label}</span>`;
+    el.onclick = () => selectOption(i);
+    optDiv.appendChild(el);
+  });
+
+  document.getElementById('backBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = answers[current] === null;
+  document.getElementById('nextBtn').textContent = current === questions.length - 1 ? 'See results' : 'Next';
+}
+
+function selectOption(i){
+  answers[current] = i;
+  renderQuestion();
+}
+
+function goNext(){
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function goBack(){
+  if(current > 0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function showResults(){
+  const scores = { aiml: 0, data: 0, ops: 0, maint: 0 };
+  answers.forEach((ansIdx, qIdx) => {
+    const opt = questions[qIdx].options[ansIdx];
+    scores[opt.primary] += 2;
+    if(opt.secondary) scores[opt.secondary] += 1;
+  });
+
+  const maxPossible = questions.length * 2; // 16
+  const ranked = Object.keys(scores)
+    .map(key => ({ key, score: scores[key], pct: Math.round(scores[key] / maxPossible * 100) }))
+    .sort((a,b) => b.score - a.score);
+
+  document.getElementById('quiz').classList.add('hidden');
+  const container = document.getElementById('resultRows');
+  container.innerHTML = '';
+
+  ranked.forEach((r, i) => {
+    const role = roles[r.key];
+    const row = document.createElement('div');
+    row.className = 'result-row' + (i === 0 ? ' top' : '');
+    row.innerHTML = `
+      ${i === 0 ? '<span class="badge">Best match</span>' : ''}
+      <div class="result-top-row">
+        <div class="result-title">${role.title}</div>
+        <div class="result-pct">${r.pct}%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${r.pct}%"></div></div>
+      <p class="result-desc">${role.desc}</p>
+    `;
+    container.appendChild(row);
+  });
+
+  document.getElementById('results').classList.remove('hidden');
+  lastRanked = ranked.map(r => ({ title: roles[r.key].title, pct: r.pct }));
+}
+
+function handleAdvisorSubmit(event){
+  event.preventDefault();
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+
+  const payload = {
+    name: name,
+    email: email,
+    phone: phone,
+    program: PROGRAM_NAME,
+    results: lastRanked,
+    submittedAt: new Date().toISOString()
+  };
+
+  // TODO: Wire this to your CRM/lead system before going live — e.g. POST the
+  // payload to a HubSpot, Mailchimp, or Zapier webhook so an advisor is notified:
+  // fetch('https://your-webhook-url', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(payload)
+  // });
+  console.log('Advisor lead captured:', payload);
+
+  document.getElementById('advisorForm').classList.add('hidden');
+  document.getElementById('successEmail').textContent = email;
+  document.getElementById('advisorSuccess').classList.remove('hidden');
+}
+
+function restartQuiz(){
+  current = 0;
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('intro').classList.remove('hidden');
+  document.getElementById('advisorForm').reset();
+  document.getElementById('advisorForm').classList.remove('hidden');
+  document.getElementById('advisorSuccess').classList.add('hidden');
+}
+</script>
+</body>
+</html>

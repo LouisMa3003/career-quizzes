@@ -314,10 +314,10 @@
   <div id="intro">
     <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
     <h1>Which Robotics & Automation role fits you?</h1>
-    <p class="sub">Answer 8 quick questions about how you like to work. We'll match you to the robotics career paths our graduates move into, ranked by fit — no email required to see your results.</p>
+    <p class="sub">Answer 30 questions about how you like to work. We'll match you to the robotics career paths our graduates move into, ranked by fit — no email required to see your results.</p>
     <div class="card">
       <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 22px;line-height:1.6;">
-        Takes about 2 minutes. Based on the Robotics &amp; Automation Machine Operator program curriculum and its four career pathways.
+        Takes about 8–10 minutes. Based on the Robotics &amp; Automation Machine Operator program curriculum and its five career pathways.
       </p>
       <button class="btn-primary" onclick="startQuiz()">Start the quiz</button>
     </div>
@@ -326,7 +326,7 @@
   <div id="quiz" class="hidden">
     <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
     <div class="progress-row">
-      <span id="qcount">Question 1 of 8</span>
+      <span id="qcount">Question 1 of 30</span>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
     <div class="card">
@@ -349,7 +349,7 @@
     <div id="resultRows"></div>
     <div class="cta-block">
       <h3>See the full program</h3>
-      <p>All four roles above are reachable through AIRE's 96-hour Robotics &amp; Automation Machine Operator certificate — virtual simulations, OSHA safety, and an employer-driven capstone.</p>
+      <p>All five roles above are reachable through AIRE's 96-hour Robotics &amp; Automation Machine Operator certificate — virtual simulations, OSHA safety, and an employer-driven capstone.</p>
       <a class="cta-btn" href="https://airobotoedu.com/programs/robotics-automation-machine-operator/" target="_blank" rel="noopener">View program details →</a>
     </div>
 
@@ -385,11 +385,11 @@
 const roles = {
   cell: {
     title: "Robotics / Machine Operator (Automation)",
-    desc: "You're drawn to running and monitoring a robot cell directly — the hands-on, day-to-day operator role. This leans on the program's robot cell operation, HMI, and monitoring modules."
+    desc: "You're drawn to running and monitoring a robot cell directly \u2014 the hands-on, day-to-day operator role. This leans on the program's robot cell operation, HMI, and monitoring modules."
   },
   line: {
     title: "Automation Line Operator",
-    desc: "You like seeing the bigger picture — coordinating how multiple stations and robots work together across a full production line."
+    desc: "You like seeing the bigger picture \u2014 coordinating how multiple stations and robots work together across a full production line."
   },
   prod: {
     title: "Production Technician (Robotics)",
@@ -398,6 +398,10 @@ const roles = {
   equip: {
     title: "Industrial Equipment Operator",
     desc: "You value clear procedures and consistent quality. This leans on the program's SOP-reading, technical-drawing, and quality-check modules."
+  },
+  ctrl: {
+    title: "Robotics Controls & Programming Technician",
+    desc: "You want to be the one programming robot paths and tuning the logic, not just running what's already set up. This leans on the program's robot programming, PLC basics, and controls modules."
   }
 };
 
@@ -409,6 +413,7 @@ const questions = [
       { label: "Coordinating how several robots and stations work together", primary: "line" },
       { label: "Diagnosing why a machine faulted and getting it back online", primary: "prod" },
       { label: "Following SOPs precisely to keep equipment running safely", primary: "equip" },
+      { label: "Programming a robot's path and tuning its logic", primary: "ctrl" },
     ]
   },
   {
@@ -418,6 +423,7 @@ const questions = [
       { label: "Coordinating handoffs between stations on a line", primary: "line" },
       { label: "Troubleshooting sensors and end effectors", primary: "prod" },
       { label: "Reading technical drawings and following procedures", primary: "equip" },
+      { label: "Writing and editing robot programs and PLC logic", primary: "ctrl" },
     ]
   },
   {
@@ -427,6 +433,7 @@ const questions = [
       { label: "Balance workflow across an automated line", primary: "line" },
       { label: "Trace a fault to a specific sensor and fix it", primary: "prod" },
       { label: "Run quality checks against the SOP", primary: "equip" },
+      { label: "Adjust a robot's motion path for a new part", primary: "ctrl" },
     ]
   },
   {
@@ -436,6 +443,7 @@ const questions = [
       { label: "Coordinating across a whole line with multiple operators", primary: "line" },
       { label: "Being the technical fix-it person maintenance calls on", primary: "prod" },
       { label: "A structured shop-floor team following clear procedures", primary: "equip" },
+      { label: "A controls team programming and commissioning new cells", primary: "ctrl" },
     ]
   },
   {
@@ -445,15 +453,17 @@ const questions = [
       { label: "Keeping an entire automated line balanced and moving", primary: "line" },
       { label: "A robot's end effector keeps misaligning and you're called to fix it", primary: "prod" },
       { label: "Conducting quality checks on parts coming off the line", primary: "equip" },
+      { label: "Reprogramming a robot cell for a brand-new product", primary: "ctrl" },
     ]
   },
   {
-    text: "Operating vs. troubleshooting — where's your comfort zone?",
+    text: "Operating vs. troubleshooting \u2014 where's your comfort zone?",
     options: [
       { label: "I like operating equipment more than digging into what broke", primary: "cell" },
       { label: "I like seeing the big picture of how a whole line runs", primary: "line" },
       { label: "I like digging into faults and figuring out the root cause", primary: "prod" },
       { label: "I like clear, well-defined SOPs and quality standards", primary: "equip" },
+      { label: "I like configuring how the robot behaves in the first place", primary: "ctrl" },
     ]
   },
   {
@@ -463,6 +473,7 @@ const questions = [
       { label: "Making an entire automated production line run efficiently", primary: "line" },
       { label: "Being the person who keeps automation equipment from going down", primary: "prod" },
       { label: "Being reliable and precise on the shop floor every shift", primary: "equip" },
+      { label: "Designing how a robot cell actually behaves", primary: "ctrl" },
     ]
   },
   {
@@ -472,6 +483,227 @@ const questions = [
       { label: "HMI and cross-station coordination exercises", primary: "line", secondary: "cell" },
       { label: "Troubleshooting, sensor, and end-effector labs", primary: "prod" },
       { label: "SOP, technical-drawing, and quality-check exercises", primary: "equip" },
+      { label: "Robot programming and PLC logic labs", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "A robot cell throws an unexpected fault. What's your first move?",
+    options: [
+      { label: "Check the HMI screen for the alarm details", primary: "cell" },
+      { label: "Check whether it's holding up the rest of the line", primary: "line" },
+      { label: "Physically inspect the sensor or end effector", primary: "prod" },
+      { label: "Follow the documented fault-response SOP", primary: "equip" },
+      { label: "Check whether it's a logic or path-programming issue", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What kind of feedback do you like getting on your work?",
+    options: [
+      { label: "Whether the cell ran smoothly on my shift", primary: "cell" },
+      { label: "Whether throughput improved across the whole line", primary: "line" },
+      { label: "Whether I found and fixed the actual root cause", primary: "prod" },
+      { label: "Whether my quality checks caught every defect", primary: "equip" },
+      { label: "Whether the new program ran cleanly on the first try", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "How do you prefer to solve a hard problem?",
+    options: [
+      { label: "Watch the cell closely and adjust as I go", primary: "cell" },
+      { label: "Step back and look at how the whole line is flowing", primary: "line" },
+      { label: "Test each component until I isolate the fault", primary: "prod" },
+      { label: "Check the SOP and follow it exactly", primary: "equip" },
+      { label: "Rework the program or logic until the behavior is right", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which subject did you enjoy most in school (or would have)?",
+    options: [
+      { label: "Anything hands-on with machines or equipment", primary: "cell" },
+      { label: "Systems thinking \u2014 how parts fit into a whole process", primary: "line" },
+      { label: "Shop class or troubleshooting how things work", primary: "prod" },
+      { label: "Technical drawing or following precise instructions", primary: "equip" },
+      { label: "Computer science or programming logic", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What's your risk tolerance around adjusting a running system?",
+    options: [
+      { label: "I'm comfortable making small live adjustments to a cell", primary: "cell" },
+      { label: "I think through how a change affects the whole line first", primary: "line" },
+      { label: "I want the fault fully understood before I touch anything", primary: "prod" },
+      { label: "I follow the approved procedure \u2014 no improvising", primary: "equip" },
+      { label: "I test program changes offline before pushing them live", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "When something breaks, what's your instinct?",
+    options: [
+      { label: "Check the cell's own readouts and alarms first", primary: "cell" },
+      { label: "Check whether upstream or downstream stations are affected", primary: "line" },
+      { label: "Get hands-on and inspect the hardware directly", primary: "prod" },
+      { label: "Pull up the SOP for this exact situation", primary: "equip" },
+      { label: "Check the program logs for the last change made", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which work environment appeals most?",
+    options: [
+      { label: "Stationed at one robot cell for most of the shift", primary: "cell" },
+      { label: "Moving up and down the line as needed", primary: "line" },
+      { label: "Called in whenever something needs fixing", primary: "prod" },
+      { label: "A structured station with clear daily checklists", primary: "equip" },
+      { label: "A programming bay working on cell logic and setup", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "How do you like to learn something new?",
+    options: [
+      { label: "Running the equipment myself under supervision", primary: "cell" },
+      { label: "Watching how a whole process flows end to end", primary: "line" },
+      { label: "Taking something apart to see how it fails", primary: "prod" },
+      { label: "Reading the manual and procedure thoroughly first", primary: "equip" },
+      { label: "Writing small test programs and seeing what happens", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What's your pace preference?",
+    options: [
+      { label: "Steady attention throughout the shift", primary: "cell" },
+      { label: "Constantly adjusting to keep the line balanced", primary: "line" },
+      { label: "Bursts of focused work when something breaks", primary: "prod" },
+      { label: "A consistent, repeatable rhythm", primary: "equip" },
+      { label: "Slower, deliberate work getting logic exactly right", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which of these mottos fits you best?",
+    options: [
+      { label: "\"Know your cell inside and out.\"", primary: "cell" },
+      { label: "\"The line is only as fast as its slowest station.\"", primary: "line" },
+      { label: "\"Find the root cause, not just the symptom.\"", primary: "prod" },
+      { label: "\"Do it the same way, every time.\"", primary: "equip" },
+      { label: "\"If the logic's right, the robot's right.\"", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What do coworkers come to you for?",
+    options: [
+      { label: "Help running or resetting a specific cell", primary: "cell" },
+      { label: "Help figuring out where a bottleneck is coming from", primary: "line" },
+      { label: "Help diagnosing a stubborn equipment fault", primary: "prod" },
+      { label: "Help making sure a process matches spec", primary: "equip" },
+      { label: "Help writing or fixing a robot program", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which scenario interests you most?",
+    options: [
+      { label: "Running a robot cell through a full night shift solo", primary: "cell" },
+      { label: "Rebalancing a line after a new station is added", primary: "line" },
+      { label: "A recurring fault that no one's tracked down yet", primary: "prod" },
+      { label: "An audit checking every station against the SOP", primary: "equip" },
+      { label: "Programming a robot for a brand-new part geometry", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "How do you handle unclear or open-ended instructions?",
+    options: [
+      { label: "I rely on what I know about the cell to figure it out", primary: "cell" },
+      { label: "I think about how it affects the whole line", primary: "line" },
+      { label: "I start testing and narrowing down the cause", primary: "prod" },
+      { label: "I look for the closest matching documented procedure", primary: "equip" },
+      { label: "I prototype a solution in the program and test it", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What's more satisfying \u2014 running equipment or building how it behaves?",
+    options: [
+      { label: "Running it well, shift after shift", primary: "cell" },
+      { label: "Keeping a whole system moving in sync", primary: "line" },
+      { label: "Fixing what's broken so it runs again", primary: "prod" },
+      { label: "Following the process precisely, every time", primary: "equip" },
+      { label: "Building how the robot actually behaves", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which part of onboarding training would excite you most?",
+    options: [
+      { label: "Your first solo shift running a robot cell", primary: "cell" },
+      { label: "Your first time coordinating a full line", primary: "line" },
+      { label: "Your first real fault to troubleshoot", primary: "prod" },
+      { label: "Learning to read technical drawings and SOPs", primary: "equip" },
+      { label: "Writing your first robot program", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Pick the tool or skill you'd want to master first.",
+    options: [
+      { label: "HMI operation and cell monitoring", primary: "cell" },
+      { label: "Line-balancing and throughput analysis", primary: "line" },
+      { label: "Sensor and end-effector diagnostics", primary: "prod" },
+      { label: "Blueprint reading and quality inspection", primary: "equip" },
+      { label: "Robot programming and PLC basics", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What's your ideal way of proving a shift went well?",
+    options: [
+      { label: "The cell ran without a single stoppage", primary: "cell" },
+      { label: "The whole line hit its throughput target", primary: "line" },
+      { label: "Every fault got resolved quickly", primary: "prod" },
+      { label: "Every quality check passed on the first try", primary: "equip" },
+      { label: "The new program ran exactly as designed", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which achievement would make you proudest after year one?",
+    options: [
+      { label: "Being trusted to run the most complex cell solo", primary: "cell" },
+      { label: "Improving throughput across an entire line", primary: "line" },
+      { label: "Cutting equipment downtime through better troubleshooting", primary: "prod" },
+      { label: "Zero quality escapes on my watch", primary: "equip" },
+      { label: "Programming a cell for a brand-new product line", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What's your communication style at work?",
+    options: [
+      { label: "Quick shift-handoff notes on the cell's status", primary: "cell" },
+      { label: "Coordinating updates across multiple stations", primary: "line" },
+      { label: "Clear write-ups of what failed and how it was fixed", primary: "prod" },
+      { label: "Precise, by-the-checklist reporting", primary: "equip" },
+      { label: "Documenting logic changes for the next programmer", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "Which added skill sounds most appealing to pick up later?",
+    options: [
+      { label: "Advanced HMI and cell-monitoring systems", primary: "cell" },
+      { label: "Lean manufacturing and line optimization", primary: "line" },
+      { label: "Advanced sensor and vision-system diagnostics", primary: "prod" },
+      { label: "Quality-systems and Six Sigma basics", primary: "equip" },
+      { label: "Advanced PLC programming and robot simulation software", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "What's a strength people often point out in you?",
+    options: [
+      { label: "I stay sharp and attentive on the equipment I run", primary: "cell" },
+      { label: "I see how all the pieces of a process fit together", primary: "line" },
+      { label: "I don't stop until I find what's actually wrong", primary: "prod" },
+      { label: "I'm consistent and thorough, every single time", primary: "equip" },
+      { label: "I can make a robot do exactly what's needed", primary: "ctrl" },
+    ]
+  },
+  {
+    text: "If you could only keep one part of the job, what would it be?",
+    options: [
+      { label: "Being hands-on running a robot cell", primary: "cell" },
+      { label: "Keeping a whole production line flowing", primary: "line" },
+      { label: "Diagnosing and fixing what's broken", primary: "prod" },
+      { label: "Following a precise, reliable process", primary: "equip" },
+      { label: "Programming how the robot actually behaves", primary: "ctrl" },
     ]
   },
 ];
@@ -531,7 +763,7 @@ function goBack(){
 }
 
 function showResults(){
-  const scores = { cell: 0, line: 0, prod: 0, equip: 0 };
+  const scores = { aiml: 0, data: 0, ops: 0, maint: 0 };
   answers.forEach((ansIdx, qIdx) => {
     const opt = questions[qIdx].options[ansIdx];
     scores[opt.primary] += 2;
@@ -582,31 +814,18 @@ function handleAdvisorSubmit(event){
     submittedAt: new Date().toISOString()
   };
 
-const formData = new URLSearchParams();
+  // TODO: Wire this to your CRM/lead system before going live — e.g. POST the
+  // payload to a HubSpot, Mailchimp, or Zapier webhook so an advisor is notified:
+  // fetch('https://your-webhook-url', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(payload)
+  // });
+  console.log('Advisor lead captured:', payload);
 
-formData.append("program", PROGRAM_NAME);
-formData.append("name", name);
-formData.append("email", email);
-formData.append("phone", phone);
-formData.append(
-  "topMatch",
-  lastRanked && lastRanked.length ? lastRanked[0].title : ""
-);
-
-fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
-  method: "POST",
-  mode: "no-cors",
-  body: formData
-})
-.then(() => {
-  document.getElementById("advisorForm").classList.add("hidden");
-  document.getElementById("successEmail").textContent = email;
-  document.getElementById("advisorSuccess").classList.remove("hidden");
-})
-.catch(error => {
-  alert("There was a problem sending your information. Please try again.");
-  console.error(error);
-});
+  document.getElementById('advisorForm').classList.add('hidden');
+  document.getElementById('successEmail').textContent = email;
+  document.getElementById('advisorSuccess').classList.remove('hidden');
 }
 
 function restartQuiz(){

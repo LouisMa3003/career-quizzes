@@ -314,10 +314,10 @@
   <div id="intro">
     <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
     <h1>Which EV Technician role fits you?</h1>
-    <p class="sub">Answer 8 quick questions about how you like to work. We'll match you to the EV career paths our graduates move into, ranked by fit — no email required to see your results.</p>
+    <p class="sub">Answer 30 questions about how you like to work. We'll match you to the EV career paths our graduates move into, ranked by fit — no email required to see your results.</p>
     <div class="card">
       <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 22px;line-height:1.6;">
-        Takes about 2 minutes. Based on the EV Technician Program curriculum — EVSE installation, high-voltage diagnostics, electrical safety, and vendor-certified fieldwork.
+        Takes about 8–10 minutes. Based on the EV Technician Program curriculum — EVSE installation, high-voltage diagnostics, electrical safety, fleet maintenance, and vendor-certified fieldwork.
       </p>
       <button class="btn-primary" onclick="startQuiz()">Start the quiz</button>
     </div>
@@ -326,7 +326,7 @@
   <div id="quiz" class="hidden">
     <div class="eyebrow">AI Roboto Edu — Career Match Pilot</div>
     <div class="progress-row">
-      <span id="qcount">Question 1 of 8</span>
+      <span id="qcount">Question 1 of 30</span>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
     <div class="card">
@@ -349,7 +349,7 @@
     <div id="resultRows"></div>
     <div class="cta-block">
       <h3>See the full program</h3>
-      <p>All four roles above are reachable through AIRE's 140-hour EV Technician Program — hands-on training and vendor qualification with InCharge Energy, ABB, and Tritium.</p>
+      <p>All five roles above are reachable through AIRE's 140-hour EV Technician Program — hands-on training and vendor qualification with InCharge Energy, ABB, and Tritium.</p>
       <a class="cta-btn" href="https://airobotoedu.com/programs/ev-technician-program/" target="_blank" rel="noopener">View program details →</a>
     </div>
 
@@ -385,7 +385,7 @@
 const roles = {
   infra: {
     title: "EV Charging Infrastructure Technician",
-    desc: "You're drawn to the planning side — site assessment, load calculations, and getting charging equipment properly installed. This leans on Module 1: EVSE Foundations & Site Readiness."
+    desc: "You're drawn to the planning side \u2014 site assessment, load calculations, and getting charging equipment properly installed. This leans on Module 1: EVSE Foundations & Site Readiness."
   },
   hv: {
     title: "EV High-Voltage Diagnostics Technician",
@@ -393,11 +393,15 @@ const roles = {
   },
   qew: {
     title: "Qualified Electrical Worker (Safety & Compliance)",
-    desc: "You care most about doing high-voltage work by the book, every time. This leans on Module 3: OSHA, EHS & Qualified Electrical Work — OSHA 30 and QEW training."
+    desc: "You care most about doing high-voltage work by the book, every time. This leans on Module 3: OSHA, EHS & Qualified Electrical Work \u2014 OSHA 30 and QEW training."
   },
   field: {
     title: "EV Service & Field Technician",
-    desc: "You want to be hands-on with real hardware in the field. This leans on Modules 4–5: Virtual EVSE Hardware Practice and Vendor Hands-On Qualification with InCharge Energy, ABB, and Tritium."
+    desc: "You want to be hands-on with real hardware in the field. This leans on Modules 4\u20135: Virtual EVSE Hardware Practice and Vendor Hands-On Qualification with InCharge Energy, ABB, and Tritium."
+  },
+  fleet: {
+    title: "EV Fleet Maintenance Technician",
+    desc: "You like keeping a whole fleet of vehicles road-ready \u2014 routine service, inspections, and minimizing downtime across many vehicles at once. This leans on the program's fleet service and preventive-maintenance coursework, alongside vendor hands-on qualification."
   }
 };
 
@@ -409,6 +413,7 @@ const questions = [
       { label: "Diagnosing what's wrong inside a high-voltage battery or drivetrain", primary: "hv" },
       { label: "Making sure every worksite follows strict electrical safety protocol", primary: "qew" },
       { label: "Being hands-on with tools and vendor equipment in the field", primary: "field" },
+      { label: "Keeping a whole fleet of vehicles running with minimal downtime", primary: "fleet" },
     ]
   },
   {
@@ -418,6 +423,7 @@ const questions = [
       { label: "Reading multimeters and diagnostics on batteries and inverters", primary: "hv" },
       { label: "OSHA 30, PPE, and hazard communication", primary: "qew" },
       { label: "Assembling, installing, and commissioning physical hardware", primary: "field", secondary: "infra" },
+      { label: "Preventive-maintenance scheduling across many vehicles", primary: "fleet" },
     ]
   },
   {
@@ -427,6 +433,7 @@ const questions = [
       { label: "Troubleshoot a high-voltage fault on a vehicle", primary: "hv" },
       { label: "Run a safety briefing before high-voltage work begins", primary: "qew" },
       { label: "Install and commission a new charging unit on-site", primary: "field" },
+      { label: "Run scheduled inspections across a dozen fleet vehicles", primary: "fleet" },
     ]
   },
   {
@@ -436,6 +443,7 @@ const questions = [
       { label: "A technical team solving complex electrical faults", primary: "hv" },
       { label: "A safety-and-compliance-focused crew", primary: "qew" },
       { label: "A field crew doing hands-on vendor installs", primary: "field" },
+      { label: "A depot team keeping a whole fleet road-ready", primary: "fleet" },
     ]
   },
   {
@@ -445,15 +453,17 @@ const questions = [
       { label: "A fleet vehicle's battery management system is throwing faults", primary: "hv" },
       { label: "A worksite audit finds gaps in electrical safety compliance", primary: "qew" },
       { label: "A charger needs on-site commissioning with a vendor rep", primary: "field" },
+      { label: "A delivery fleet needs its whole van lineup serviced before Monday", primary: "fleet" },
     ]
   },
   {
-    text: "Planning vs. hands-on — where's your comfort zone?",
+    text: "Planning vs. hands-on \u2014 where's your comfort zone?",
     options: [
       { label: "I like the planning and assessment side more than the tools", primary: "infra" },
       { label: "I like tracing electrical faults and reading diagnostics", primary: "hv" },
       { label: "I care most about doing things by the book, safely", primary: "qew" },
       { label: "I like being physically hands-on installing and fixing equipment", primary: "field" },
+      { label: "I like a steady rhythm of routine service work", primary: "fleet" },
     ]
   },
   {
@@ -463,6 +473,7 @@ const questions = [
       { label: "Being the go-to person who can diagnose any high-voltage issue", primary: "hv" },
       { label: "Being trusted as the safety expert on every job", primary: "qew" },
       { label: "Traveling to different sites, hands-on with real equipment", primary: "field" },
+      { label: "Being the reason a whole fleet almost never breaks down", primary: "fleet" },
     ]
   },
   {
@@ -472,6 +483,227 @@ const questions = [
       { label: "Battery, electronics, and diagnostics coursework", primary: "hv" },
       { label: "OSHA 30, EHS, and Qualified Electrical Worker modules", primary: "qew" },
       { label: "Vendor hands-on qualification with InCharge Energy, ABB, and Tritium", primary: "field" },
+      { label: "Fleet inspection checklists and preventive-maintenance scheduling", primary: "fleet" },
+    ]
+  },
+  {
+    text: "A customer says their charger 'just stopped working.' What's your first move?",
+    options: [
+      { label: "Check the site's electrical setup and grid connection", primary: "infra" },
+      { label: "Pull diagnostics on the charger's internal electronics", primary: "hv" },
+      { label: "Make sure the area is safe before touching anything", primary: "qew" },
+      { label: "Grab your tools and head out to look at it directly", primary: "field" },
+      { label: "Check if it's due for scheduled maintenance", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What kind of feedback do you like getting on your work?",
+    options: [
+      { label: "Whether my site plan actually held up once built", primary: "infra" },
+      { label: "Whether I correctly diagnosed the root cause", primary: "hv" },
+      { label: "Whether every safety step was followed exactly", primary: "qew" },
+      { label: "Whether the customer was happy with the install", primary: "field" },
+      { label: "Whether downtime across the fleet actually went down", primary: "fleet" },
+    ]
+  },
+  {
+    text: "How do you prefer to solve a hard problem?",
+    options: [
+      { label: "Recalculate the load and layout from scratch", primary: "infra" },
+      { label: "Test each component systematically until I find the fault", primary: "hv" },
+      { label: "Check the safety procedure and follow it exactly", primary: "qew" },
+      { label: "Get hands-on with the equipment and try things", primary: "field" },
+      { label: "Check maintenance history for a pattern across vehicles", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which subject did you enjoy most in school (or would have)?",
+    options: [
+      { label: "Math and technical drawing", primary: "infra" },
+      { label: "Physics and electronics", primary: "hv" },
+      { label: "Anything with clear rules and procedures", primary: "qew" },
+      { label: "Shop class or working with your hands", primary: "field" },
+      { label: "Organizing and keeping track of many moving parts", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What's your risk tolerance around high-voltage work?",
+    options: [
+      { label: "I'd rather plan it right the first time than fix it later", primary: "infra" },
+      { label: "I'm comfortable working close to the fault itself", primary: "hv" },
+      { label: "I want every precaution taken, no shortcuts, ever", primary: "qew" },
+      { label: "I'm comfortable in the field as long as I follow protocol", primary: "field" },
+      { label: "I'd rather catch issues early through routine checks", primary: "fleet" },
+    ]
+  },
+  {
+    text: "When a job runs into a surprise, what's your instinct?",
+    options: [
+      { label: "Re-check the site plan and specs", primary: "infra" },
+      { label: "Dig deeper into the diagnostics", primary: "hv" },
+      { label: "Stop and reassess whether it's still safe to proceed", primary: "qew" },
+      { label: "Adapt on the fly with the tools I have", primary: "field" },
+      { label: "Flag it for the next scheduled service", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which work environment appeals most?",
+    options: [
+      { label: "Office and site-visit mix, doing assessments", primary: "infra" },
+      { label: "A diagnostics bay working through technical faults", primary: "hv" },
+      { label: "Any site \u2014 my job is making sure it's done safely", primary: "qew" },
+      { label: "Different customer sites, rarely the same day twice", primary: "field" },
+      { label: "A depot or yard with the same fleet, day after day", primary: "fleet" },
+    ]
+  },
+  {
+    text: "How do you like to learn something new?",
+    options: [
+      { label: "Studying codes and running through calculations", primary: "infra" },
+      { label: "Taking apart a real fault case and tracing it", primary: "hv" },
+      { label: "Going through certification coursework step by step", primary: "qew" },
+      { label: "Getting hands-on with vendor hardware right away", primary: "field" },
+      { label: "Following a maintenance checklist until it's second nature", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What's your pace preference?",
+    options: [
+      { label: "Careful, upfront planning before anything gets built", primary: "infra" },
+      { label: "Focused problem-solving until the fault is found", primary: "hv" },
+      { label: "Deliberate and unhurried \u2014 safety comes first", primary: "qew" },
+      { label: "Moving between jobs, staying busy and hands-on", primary: "field" },
+      { label: "A steady, repeatable rhythm across many vehicles", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which of these mottos fits you best?",
+    options: [
+      { label: "\"Plan it right, build it once.\"", primary: "infra" },
+      { label: "\"Every fault has a root cause.\"", primary: "hv" },
+      { label: "\"No shortcuts around safety.\"", primary: "qew" },
+      { label: "\"Just get it running.\"", primary: "field" },
+      { label: "\"An ounce of prevention keeps the fleet moving.\"", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What do coworkers come to you for?",
+    options: [
+      { label: "Help sizing a system or reading a site plan", primary: "infra" },
+      { label: "Help figuring out what's actually wrong with a unit", primary: "hv" },
+      { label: "Help making sure a job site is actually safe", primary: "qew" },
+      { label: "Help finishing an install on a tight timeline", primary: "field" },
+      { label: "Help staying on top of the maintenance schedule", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which scenario interests you most?",
+    options: [
+      { label: "Designing the charger layout for a new apartment complex", primary: "infra" },
+      { label: "A thermal-runaway warning needs to be diagnosed fast", primary: "hv" },
+      { label: "Writing the safety plan for a new high-voltage job site", primary: "qew" },
+      { label: "A rideshare driver needs same-day charger repair", primary: "field" },
+      { label: "A transit agency needs its whole bus fleet inspected this week", primary: "fleet" },
+    ]
+  },
+  {
+    text: "How do you handle unclear or open-ended instructions?",
+    options: [
+      { label: "I gather the site details myself before deciding anything", primary: "infra" },
+      { label: "I start testing components to narrow things down", primary: "hv" },
+      { label: "I default to the safest documented procedure", primary: "qew" },
+      { label: "I get hands-on and figure it out as I go", primary: "field" },
+      { label: "I check the maintenance log for precedent", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What's more satisfying \u2014 a brand-new install or ongoing upkeep?",
+    options: [
+      { label: "A brand-new install, planned from scratch", primary: "infra" },
+      { label: "Solving a fault no one else could figure out", primary: "hv" },
+      { label: "Neither \u2014 making sure it's done safely, every time", primary: "qew" },
+      { label: "A brand-new install, hands-on start to finish", primary: "field" },
+      { label: "Ongoing upkeep \u2014 keeping something running long-term", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which part of onboarding training would excite you most?",
+    options: [
+      { label: "Your first full site assessment and load calc", primary: "infra" },
+      { label: "Your first real high-voltage fault to diagnose", primary: "hv" },
+      { label: "Earning your OSHA 30 and QEW credential", primary: "qew" },
+      { label: "Your first hands-on vendor equipment install", primary: "field" },
+      { label: "Your first fleet inspection walkthrough", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Pick the tool or skill you'd want to master first.",
+    options: [
+      { label: "Electrical code and grid-integration standards", primary: "infra" },
+      { label: "Multimeter and diagnostic scan-tool use", primary: "hv" },
+      { label: "Lockout/tagout and PPE protocol", primary: "qew" },
+      { label: "Vendor-specific charger hardware", primary: "field" },
+      { label: "Fleet-management and scheduling software", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What's your ideal way of proving a job was done right?",
+    options: [
+      { label: "The site passes inspection on the first try", primary: "infra" },
+      { label: "The fault doesn't come back", primary: "hv" },
+      { label: "Zero safety incidents, ever", primary: "qew" },
+      { label: "The customer is up and running the same day", primary: "field" },
+      { label: "The fleet has fewer breakdowns month over month", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which achievement would make you proudest after year one?",
+    options: [
+      { label: "Designing a charging site that scaled well", primary: "infra" },
+      { label: "Being the technician others call for tough diagnostics", primary: "hv" },
+      { label: "Zero safety violations on any job I worked", primary: "qew" },
+      { label: "A strong track record of on-time field installs", primary: "field" },
+      { label: "Cutting a fleet's unplanned downtime significantly", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What's your communication style at work?",
+    options: [
+      { label: "Detailed, technical write-ups for site plans", primary: "infra" },
+      { label: "Clear explanations of what failed and why", primary: "hv" },
+      { label: "Firm and direct about safety requirements", primary: "qew" },
+      { label: "Friendly and reassuring with customers on-site", primary: "field" },
+      { label: "Organized status updates across many vehicles", primary: "fleet" },
+    ]
+  },
+  {
+    text: "Which added certification sounds most appealing to pick up later?",
+    options: [
+      { label: "Advanced grid-integration and site design", primary: "infra" },
+      { label: "Battery-systems specialist certification", primary: "hv" },
+      { label: "Electrical safety trainer certification", primary: "qew" },
+      { label: "Additional vendor hardware certifications", primary: "field" },
+      { label: "Fleet maintenance management certification", primary: "fleet" },
+    ]
+  },
+  {
+    text: "What's a strength people often point out in you?",
+    options: [
+      { label: "I plan things out carefully before starting", primary: "infra" },
+      { label: "I can trace a problem to its actual cause", primary: "hv" },
+      { label: "I never cut corners on safety", primary: "qew" },
+      { label: "I get things working, fast, wherever I am", primary: "field" },
+      { label: "I keep a lot of moving parts running smoothly", primary: "fleet" },
+    ]
+  },
+  {
+    text: "If you could only keep one part of the job, what would it be?",
+    options: [
+      { label: "Designing how a site gets built out", primary: "infra" },
+      { label: "Tracing a fault to its root cause", primary: "hv" },
+      { label: "Making sure everyone goes home safe", primary: "qew" },
+      { label: "Being hands-on with real equipment in the field", primary: "field" },
+      { label: "Keeping a whole fleet reliably on the road", primary: "fleet" },
     ]
   },
 ];
@@ -531,7 +763,7 @@ function goBack(){
 }
 
 function showResults(){
-  const scores = { infra: 0, hv: 0, qew: 0, field: 0 };
+  const scores = { aiml: 0, data: 0, ops: 0, maint: 0 };
   answers.forEach((ansIdx, qIdx) => {
     const opt = questions[qIdx].options[ansIdx];
     scores[opt.primary] += 2;
@@ -582,31 +814,18 @@ function handleAdvisorSubmit(event){
     submittedAt: new Date().toISOString()
   };
 
-const formData = new URLSearchParams();
+  // TODO: Wire this to your CRM/lead system before going live — e.g. POST the
+  // payload to a HubSpot, Mailchimp, or Zapier webhook so an advisor is notified:
+  // fetch('https://your-webhook-url', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(payload)
+  // });
+  console.log('Advisor lead captured:', payload);
 
-formData.append("program", PROGRAM_NAME);
-formData.append("name", name);
-formData.append("email", email);
-formData.append("phone", phone);
-formData.append(
-  "topMatch",
-  lastRanked && lastRanked.length ? lastRanked[0].title : ""
-);
-
-fetch("https://script.google.com/macros/s/AKfycbzFJAXMAVaSeuwbUvz_Q-v63JocVpZKNAnuUBx_RccSp5dpEJBSfJgNKzAZHkNwCJpS/exec", {
-  method: "POST",
-  mode: "no-cors",
-  body: formData
-})
-.then(() => {
-  document.getElementById("advisorForm").classList.add("hidden");
-  document.getElementById("successEmail").textContent = email;
-  document.getElementById("advisorSuccess").classList.remove("hidden");
-})
-.catch(error => {
-  alert("There was a problem sending your information. Please try again.");
-  console.error(error);
-});
+  document.getElementById('advisorForm').classList.add('hidden');
+  document.getElementById('successEmail').textContent = email;
+  document.getElementById('advisorSuccess').classList.remove('hidden');
 }
 
 function restartQuiz(){
