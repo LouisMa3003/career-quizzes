@@ -776,7 +776,7 @@ function showResults(){
     if(opt.secondary) scores[opt.secondary] += 1;
   });
 
-  const maxPossible = questions.length * 2; // 16
+  const maxPossible = questions.length * 2; // 60 for 30 questions
   const ranked = Object.keys(scores)
     .map(key => ({ key, score: scores[key], pct: Math.round(scores[key] / maxPossible * 100) }))
     .sort((a,b) => b.score - a.score);
