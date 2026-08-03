@@ -763,7 +763,13 @@ function goBack(){
 }
 
 function showResults(){
-  const scores = { aiml: 0, data: 0, ops: 0, maint: 0 };
+  const scores = {
+  cell: 0,
+  line: 0,
+  prod: 0,
+  equip: 0,
+  ctrl: 0
+};
   answers.forEach((ansIdx, qIdx) => {
     const opt = questions[qIdx].options[ansIdx];
     scores[opt.primary] += 2;
